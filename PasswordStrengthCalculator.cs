@@ -14,10 +14,10 @@ namespace PasswordGenerator
             bool useNumbers
         )
         {
-            if (length < 8 || (!useUpperCase || !useLowerCase || !useNumbers || !useSpecialChars))
+            if (length < 8 || (!useUpperCase && !useLowerCase) || (!useNumbers && !useSpecialChars))
                 return WeakPassword;
             else if (
-                length < 12 || (!useUpperCase && !useLowerCase) || (!useNumbers && !useSpecialChars)
+                length < 12 || !useUpperCase || !useLowerCase || !useNumbers || !useSpecialChars
             )
                 return ModeratePassword;
             else
