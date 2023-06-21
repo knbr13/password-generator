@@ -19,8 +19,16 @@ namespace PasswordGenerator
                 useSpecialChars,
                 useNumbers
             );
-            Console.Write("Generated Password: ");
-            LogMessage(generatedPassword, ConsoleColor.Green);
+
+            string strength = PasswordStrengthCalculator.CalculatePasswordStrength(
+                passwordLength,
+                useUpperCase,
+                useLowerCase,
+                useSpecialChars,
+                useNumbers
+            );
+
+            DisplayPasswordWithStrength(generatedPassword, strength);
 
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
@@ -91,6 +99,28 @@ namespace PasswordGenerator
             }
 
             return password.ToString();
+        }
+
+        static void DisplayPasswordWithStrength(string password, string strength)
+        {
+            Console.WriteLine("Generated Password: " + password);
+            Console.Write("Password Strength: ");
+
+            switch (strength)
+            {
+                case "Weak":
+                    LogMessage(strength, ConsoleColor.Red);
+                    break;
+                case "Moderate":
+                    LogMessage(strength, ConsoleColor.Yellow);
+                    break;
+                case "Strong":
+                    LogMessage(strength, ConsoleColor.Green);
+                    break;
+                default:
+                    Console.WriteLine(strength);
+                    break;
+            }
         }
 
         static void LogMessage(string message, ConsoleColor color)
