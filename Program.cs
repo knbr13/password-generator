@@ -12,6 +12,15 @@ namespace PasswordGenerator
             bool useSpecialChars = GetBooleanInput("Use special characters? (Y/N): ");
             bool useNumbers = GetBooleanInput("Use numbers? (Y/N): ");
 
+            if (!useUpperCase && !useLowerCase && !useSpecialChars && !useNumbers)
+            {
+                LogMessage(
+                    "You must select at least one character option. Please try again.",
+                    ConsoleColor.DarkRed
+                );
+                return;
+            }
+
             string generatedPassword = GeneratePassword(
                 passwordLength,
                 useUpperCase,
