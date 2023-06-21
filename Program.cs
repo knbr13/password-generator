@@ -19,7 +19,10 @@ namespace PasswordGenerator
                 useSpecialChars,
                 useNumbers
             );
-            Console.WriteLine("Generated Password: " + generatedPassword);
+            Console.Write("Generated Password: ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(generatedPassword);
+            Console.ResetColor();
 
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
