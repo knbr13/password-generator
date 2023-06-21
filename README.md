@@ -2,7 +2,7 @@
 
 A simple password generator program written in C#. This console application allows users to generate random passwords based on their preferred criteria, including password length, uppercase letters, lowercase letters, special characters, and numbers.
 
-![Password Generator Demo](/assets/img/screenshot.png)
+![Password Generator Demo](assets/img/password-generator-screenshot.png)
 
 ## Getting Started
 
