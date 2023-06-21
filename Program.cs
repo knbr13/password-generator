@@ -94,5 +94,12 @@ namespace PasswordGenerator
 
             return password.ToString();
         }
+
+        static void LogMessage(string message, ConsoleColor color)
+        {
+            Console.ForegroundColor = color;
+            Console.WriteLine(message);
+            Console.ResetColor();
+        }
     }
 }
