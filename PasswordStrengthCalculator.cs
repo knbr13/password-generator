@@ -2,11 +2,11 @@ namespace PasswordGenerator
 {
     static class PasswordStrengthCalculator
     {
-        private static string WeakPassword = "Weak";
-        private static string ModeratePassword = "Moderate";
-        private static string StrongPassword = "Strong";
+        private static readonly string WeakPassword = "Weak";
+        private static readonly string ModeratePassword = "Moderate";
+        private static readonly string StrongPassword = "Strong";
 
-        static string PasswordStrength(
+        public static string CalculatePasswordStrength(
             int length,
             bool useUpperCase,
             bool useLowerCase,
