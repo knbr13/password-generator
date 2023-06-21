@@ -45,11 +45,12 @@ namespace PasswordGenerator
             while (true)
             {
                 Console.Write(message);
-                if (message == "Y" || message == "YES")
+                string? input = Console.ReadLine()?.ToUpper();
+                if (input == "Y" || input == "YES")
                 {
                     return true;
                 }
-                else if (message == "N" || message == "NO")
+                else if (input == "N" || input == "NO")
                 {
                     return false;
                 }
