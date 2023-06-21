@@ -16,5 +16,22 @@
             }
             return passwordLength;
         }
+
+        static bool GetBooleanInput(string message)
+        {
+            while (true)
+            {
+                Console.Write(message);
+                if (message == "Y" || message == "YES")
+                {
+                    return true;
+                }
+                else if (message == "N" || message == "NO")
+                {
+                    return false;
+                }
+                Console.WriteLine("Invalid input. Please enter 'Y' or 'N'.");
+            }
+        }
     }
 }
