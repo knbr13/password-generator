@@ -4,6 +4,27 @@ namespace PasswordGenerator
 {
     class Program
     {
+        static void Main(string[] args)
+        {
+            int passwordLength = GetPasswordLength();
+            bool useUpperCase = GetBooleanInput("Use uppercase letters? (Y/N): ");
+            bool useLowerCase = GetBooleanInput("Use lowercase letters? (Y/N): ");
+            bool useSpecialChars = GetBooleanInput("Use special characters? (Y/N): ");
+            bool useNumbers = GetBooleanInput("Use numbers? (Y/N): ");
+
+            string generatedPassword = GeneratePassword(
+                passwordLength,
+                useUpperCase,
+                useLowerCase,
+                useSpecialChars,
+                useNumbers
+            );
+            Console.WriteLine("Generated Password: " + generatedPassword);
+
+            Console.WriteLine("Press any key to exit.");
+            Console.ReadKey();
+        }
+
         static int GetPasswordLength()
         {
             int passwordLength;
