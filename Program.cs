@@ -20,9 +20,7 @@ namespace PasswordGenerator
                 useNumbers
             );
             Console.Write("Generated Password: ");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(generatedPassword);
-            Console.ResetColor();
+            LogMessage(generatedPassword, ConsoleColor.Green);
 
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
