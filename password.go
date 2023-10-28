@@ -7,20 +7,12 @@ import (
 	"strings"
 )
 
-type Strength uint8
-
-const (
-	WEAK Strength = iota
-	MEDIUM
-	STRONG
-)
-
 type Password struct {
 	WithLowerCaseChars bool
 	WithUpperCaseChars bool
 	WithSpecialChars   bool
 	WithDigitsChars    bool
-	Strength           Strength
+	Length             uint
 }
 
 type option func(*Password)
@@ -60,9 +52,9 @@ func WithSpecialChars(b bool) option {
 	}
 }
 
-func OfStrength(s Strength) option {
+func OfLength(s uint) option {
 	return func(p *Password) {
-		p.Strength = s
+		p.Length = s
 	}
 }
 
@@ -71,6 +63,7 @@ func GetPasswordArgs() (*Password, error) {
 	uppercase := flag.Bool("uppercase", true, "password will contain uppercase characters")
 	digitschars := flag.Bool("digitschars", false, "password will contain digitschars characters")
 	specialchars := flag.Bool("specialchars", false, "password will contain specialchars characters")
+	passwordLength := flag.Uint("passwordLength", 8, "password length")
 
 	if !*lowercase && !*uppercase && !*specialchars && !*digitschars {
 		return nil, fmt.Errorf("you must at least choose one set of characters")
@@ -81,6 +74,7 @@ func GetPasswordArgs() (*Password, error) {
 		WithLowerCaseChars(*lowercase),
 		WithUpperCaseChars(*uppercase),
 		WithSpecialChars(*specialchars),
+		OfLength(*passwordLength),
 	), nil
 }
 
