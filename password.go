@@ -73,7 +73,7 @@ func GetPasswordArgs() (*Password, error) {
 	specialchars := flag.Bool("specialchars", false, "password will contain specialchars characters")
 
 	if !*lowercase && !*uppercase && !*specialchars && !*digitschars {
-		return nil, fmt.Errorf("password: you must at least choose one set of characters")
+		return nil, fmt.Errorf("you must at least choose one set of characters")
 	}
 
 	return new(
