@@ -11,7 +11,7 @@ type Password struct {
 	WithLowerCaseChars bool
 	WithUpperCaseChars bool
 	WithSpecialChars   bool
-	WithDigitsChars    bool
+	WithDigits         bool
 	Length             uint
 }
 
@@ -40,9 +40,9 @@ func WithUpperCaseChars(b bool) option {
 	}
 }
 
-func WithDigitsChars(b bool) option {
+func WithDigits(b bool) option {
 	return func(p *Password) {
-		p.WithDigitsChars = b
+		p.WithDigits = b
 	}
 }
 
@@ -61,9 +61,9 @@ func OfLength(s uint) option {
 func GetPasswordArgs() (*Password, error) {
 	lowercase := flag.Bool("lowercase", true, "password will contain lowercase characters")
 	uppercase := flag.Bool("uppercase", true, "password will contain uppercase characters")
-	digitschars := flag.Bool("digitschars", false, "password will contain digitschars characters")
+	digitschars := flag.Bool("digits", false, "password will contain digitschars characters")
 	specialchars := flag.Bool("specialchars", false, "password will contain specialchars characters")
-	passwordLength := flag.Uint("passwordLength", 8, "password length")
+	passwordLength := flag.Uint("length", 8, "password length")
 	flag.Parse()
 
 	if !*lowercase && !*uppercase && !*specialchars && !*digitschars {
@@ -71,7 +71,7 @@ func GetPasswordArgs() (*Password, error) {
 	}
 
 	return new(
-		WithDigitsChars(*digitschars),
+		WithDigits(*digitschars),
 		WithLowerCaseChars(*lowercase),
 		WithUpperCaseChars(*uppercase),
 		WithSpecialChars(*specialchars),
@@ -82,8 +82,8 @@ func GetPasswordArgs() (*Password, error) {
 const (
 	LOWER_CASE_CHARS = "abcdefghijklmnopqrstuvwxyz"
 	UPPER_CASE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	DIGITS_CHARS     = "0123456789"
 	SPECIAL_CHARS    = "!@#$%^&*()_+[]{}|;':,.<>?/~"
+	DIGITS           = "0123456789"
 )
 
 func GetCharSet(p *Password) (charset []string) {
@@ -93,8 +93,8 @@ func GetCharSet(p *Password) (charset []string) {
 	if p.WithLowerCaseChars {
 		charset = append(charset, strings.Split(LOWER_CASE_CHARS, "")...)
 	}
-	if p.WithDigitsChars {
-		charset = append(charset, strings.Split(DIGITS_CHARS, "")...)
+	if p.WithDigits {
+		charset = append(charset, strings.Split(DIGITS, "")...)
 	}
 	if p.WithSpecialChars {
 		charset = append(charset, strings.Split(SPECIAL_CHARS, "")...)
