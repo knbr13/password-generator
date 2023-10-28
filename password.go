@@ -109,3 +109,45 @@ func BuildPassword(charset []string, length uint) (s string) {
 	}
 	return s
 }
+
+func PasswordStrength(password string) string {
+	if len(password) < 8 {
+		return "Weak"
+	}
+
+	var hasLowerCase, hasUpperCase, hasDigit, hasSpecial bool
+
+	for _, char := range password {
+		if 'a' <= char && char <= 'z' {
+			hasLowerCase = true
+		} else if 'A' <= char && char <= 'Z' {
+			hasUpperCase = true
+		} else if '0' <= char && char <= '9' {
+			hasDigit = true
+		} else {
+			hasSpecial = true
+		}
+	}
+
+	typesCount := 0
+	if hasLowerCase {
+		typesCount++
+	}
+	if hasUpperCase {
+		typesCount++
+	}
+	if hasDigit {
+		typesCount++
+	}
+	if hasSpecial {
+		typesCount++
+	}
+
+	if typesCount >= 3 {
+		return "Strong"
+	} else if typesCount == 2 {
+		return "Moderate"
+	}
+
+	return "Weak"
+}
