@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"strings"
 )
 
 type Strength uint8
@@ -88,3 +89,19 @@ const (
 	DIGITS_CHARS     = "0123456789"
 	SPECIAL_CHARS    = "!@#$%^&*()_+[]{}|;':,.<>?/~"
 )
+
+func GetCharSet(p *Password) (charset []string) {
+	if p.WithUpperCaseChars {
+		charset = append(charset, strings.Split(UPPER_CASE_CHARS, "")...)
+	}
+	if p.WithLowerCaseChars {
+		charset = append(charset, strings.Split(LOWER_CASE_CHARS, "")...)
+	}
+	if p.WithDigitsChars {
+		charset = append(charset, strings.Split(DIGITS_CHARS, "")...)
+	}
+	if p.WithSpecialChars {
+		charset = append(charset, strings.Split(SPECIAL_CHARS, "")...)
+	}
+	return
+}
