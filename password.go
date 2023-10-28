@@ -81,3 +81,10 @@ func GetPasswordArgs() (*Password, error) {
 		WithSpecialChars(*specialchars),
 	), nil
 }
+
+const (
+	LOWER_CASE_CHARS = "abcdefghijklmnopqrstuvwxyz"
+	UPPER_CASE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	DIGITS_CHARS     = "0123456789"
+	SPECIAL_CHARS    = "!@#$%^&*()_+[]{}|;':,.<>?/~"
+)
