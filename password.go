@@ -101,9 +101,9 @@ func GetCharSet(p *Password) (charset []string) {
 	return
 }
 
-func BuildPassword(charset []string, length int) string {
-	var s string
-	for i := 0; i < length; i++ {
+func BuildPassword(charset []string, length uint) (s string) {
+	var i uint
+	for i = 0; i < length; i++ {
 		s += charset[rand.Intn(len(charset))]
 	}
 	return s
