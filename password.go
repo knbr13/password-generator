@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"math/rand"
 	"strings"
 )
 
@@ -104,4 +105,12 @@ func GetCharSet(p *Password) (charset []string) {
 		charset = append(charset, strings.Split(SPECIAL_CHARS, "")...)
 	}
 	return
+}
+
+func BuildPassword(charset []string, length int) string {
+	var s string
+	for i := 0; i < length; i++ {
+		s += charset[rand.Intn(len(charset))]
+	}
+	return s
 }
