@@ -14,5 +14,6 @@ func main() {
 	charset := GetCharSet(pwd)
 
 	password := BuildPassword(charset, pwd.Length)
-	fmt.Println("password:", password)
+	fmt.Printf("%-10s %s\n", "password:", password)
+	fmt.Printf("%-10s %s\n", "strength:", PasswordStrength(password))
 }
