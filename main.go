@@ -1,6 +1,9 @@
 package main
 
-import "log"
+import (
+	"fmt"
+	"log"
+)
 
 func main() {
 	pwd, err := GetPasswordArgs()
@@ -10,5 +13,6 @@ func main() {
 
 	charset := GetCharSet(pwd)
 
-	BuildPassword(charset, pwd.Length)
+	password := BuildPassword(charset, pwd.Length)
+	fmt.Println("password:", password)
 }
