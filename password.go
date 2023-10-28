@@ -15,3 +15,16 @@ type Password struct {
 	WithDigitsChars    bool
 	Strength           Strength
 }
+
+type Option func(*Password)
+
+func New(options ...Option) *Password {
+	p := &Password{
+		WithLowerCaseChars: true,
+		WithUpperCaseChars: true,
+	}
+	for _, option := range options {
+		option(p)
+	}
+	return p
+}
