@@ -1,5 +1,10 @@
 package main
 
+import (
+	"flag"
+	"fmt"
+)
+
 type Strength uint8
 
 const (
@@ -16,9 +21,9 @@ type Password struct {
 	Strength           Strength
 }
 
-type Option func(*Password)
+type option func(*Password)
 
-func New(options ...Option) *Password {
+func new(options ...option) *Password {
 	p := &Password{
 		WithLowerCaseChars: true,
 		WithUpperCaseChars: true,
@@ -29,32 +34,50 @@ func New(options ...Option) *Password {
 	return p
 }
 
-func WithLowerCaseChars(b bool) Option {
+func WithLowerCaseChars(b bool) option {
 	return func(p *Password) {
 		p.WithLowerCaseChars = b
 	}
 }
 
-func WithUpperCaseChars(b bool) Option {
+func WithUpperCaseChars(b bool) option {
 	return func(p *Password) {
 		p.WithUpperCaseChars = b
 	}
 }
 
-func WithDigitsChars(b bool) Option {
+func WithDigitsChars(b bool) option {
 	return func(p *Password) {
 		p.WithDigitsChars = b
 	}
 }
 
-func WithSpecialChars(b bool) Option {
+func WithSpecialChars(b bool) option {
 	return func(p *Password) {
 		p.WithSpecialChars = b
 	}
 }
 
-func OfStrength(s Strength) Option {
+func OfStrength(s Strength) option {
 	return func(p *Password) {
 		p.Strength = s
 	}
+}
+
+func GetPasswordArgs() (*Password, error) {
+	lowercase := flag.Bool("lowercase", true, "password will contain lowercase characters")
+	uppercase := flag.Bool("uppercase", true, "password will contain uppercase characters")
+	digitschars := flag.Bool("digitschars", false, "password will contain digitschars characters")
+	specialchars := flag.Bool("specialchars", false, "password will contain specialchars characters")
+
+	if !*lowercase && !*uppercase && !*specialchars && !*digitschars {
+		return nil, fmt.Errorf("password: you must at least choose one set of characters")
+	}
+
+	return new(
+		WithDigitsChars(*digitschars),
+		WithLowerCaseChars(*lowercase),
+		WithUpperCaseChars(*uppercase),
+		WithSpecialChars(*specialchars),
+	), nil
 }
