@@ -13,7 +13,7 @@ Before using the password generator, make sure you have Go installed on your sys
 ### Installing
 
 1. Clone the repository to your local machine:
-   `git clone https://github.com/abdullah-alaadine/password-generator.git`
+   `git clone https://github.com/knbr13/password-generator.git`
 
 2. Navigate to the project directory:
    `cd password-generator`
